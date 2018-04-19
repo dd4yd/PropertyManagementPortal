@@ -1,7 +1,8 @@
 # PropertyManagementPortal
+This was the final group project for my Software Engineering class
 
 # Property Bros
-Created by: Noah Panicola, David Dean, Taylor Ratliff. The documentation for the API, along with its source code, can be found here: https://github.com/noahpanicola/SEP-API
+Created by: Noah Panicola, David Dean, Taylor Ratliff. The documentation for the API, along with its source code, can be found here: https://github.com/noahpanicola/SEP-API 
 
 -The documentation for this site is located at https://drive.google.com/open?id=0B-BoecMwDzOIaUNjeXhwazlzMmc
 
@@ -36,4 +37,20 @@ The inbox modal's main emphasis is for tentants to message their landlord/ prope
 ## Licenses
 * [Apache Version 2.0 License Aggreement](https://www.apache.org/licenses/LICENSE-2.0)
 * [Angular JS License (MIT License)](https://opensource.org/licenses/MIT)
+* [Amazon Software License](https://aws.amazon.com/asl/)
+* [Apache Version 2.0 License Aggreement](https://www.apache.org/licenses/LICENSE-2.0)
+* [Docker Components and Licenses](https://www.docker.com/components-licenses)
+
+# SEP-API
+Back-end to CS4320-FinalProject. 
+
+## Database
+We implemented a MySQL database, communicating with the front end through PHP, along with our Java Spring API taking care of the bulk of the backend. Before the application was deployed to AWS, we hosted it locally through MAMP and Apache Tomcat.
+
+## Deployment
+We deployed our Web Application through Amazon AWS Elastic Beanstalk. We had to deploy our angular front end, Java Spring API, and PHP, all onto one server, which is why we chose to use elastic beanstalk.
+
+## Prerequisites
+Maven Version 3 <br />
+Docker Version 17
 
