@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Property Manager</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/site.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body id="home-body">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+                    <a class="navbar-brand" href="#">
+                        <img id="house-logo" src="images/house-logo.jpg" />
+                        Property Manager
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <!-- <li></li> -->
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                        <a href="#">
+                            <li id="btn-logout" ><a href="#">Logout</a></li>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="loading container-fluid">
+            <div class="container-fluid" style="width: 150px;">
+                <h3>Loading...</h3>
+                <div>
+                    <i class="fa fa-circle-o-notch fa-spin loader container-fluid"></i>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid main-content">
+            <div id="user-profile">
+                    <h3>My Profile</h3><hr>
+                    <div>
+                        <div class="user-div" id="user-image"></div>
+                        <div class="user-div" id="user-name"></div>
+                    </div>
+                </div>
+                <div id="user-properties">
+                    <span id="add-property-span" class="glyphicon glyphicon-plus"></span>
+                    <h3>My Properties</h3><hr>
+                    <div id="property-content"></div>
+                </div>
+                <div id="user-inbox" class="container-fluid">
+                    <div id="inbox-loader">
+                        <h3>Loading Inbox...</h3>
+                        <div>
+                            <i class="fa fa-circle-o-notch fa-spin container-fluid"></i>
+                        </div>
+                    </div>
+                    <h3>My Inbox</h3>
+                    <button id="msg-modal-btn" class="btn btn-success">New Message</button>
+                    <hr>
+                    <div>
+                        <table id="inbox-sent" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">From</th>
+                                    <th scope="col">Time Sent</th>
+                                    <th scope="col">Opened</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inbox-table-body"></tbody>
+                        </table>
+                        <div id="inbox-received"></div>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Message Modal -->
+        <div id="msg-modal" class="home-modal">
+            <div class="msg-modal-content container-fluid">
+                <div class="modal-header">
+                    <h3>Send a Message</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div>
+                            <input type="text" id="to-input">
+                            <label><b>To</b></label>
+                        </div>
+                        <div>
+                            <input type="text" id="subject-input">
+                            <label><b>Subject</b></label>
+                        </div>
+                        <div>
+                            <textarea id="body-input"></textarea>
+                        </div>
+                        <button id="send-msg-btn" class="btn btn-success">
+                            <span class="glyphicon glyphicon-send"></span> Send
+                        </button>
+                        <button class="btn btn-danger cancel-btn">
+                                <span class="glyphicon glyphicon-remove-circle"></span> Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Detail Modal -->
+        <div class="home-modal" id="property-detail-modal">
+            <div class="property-modal-content container-fluid">
+                <div class="modal-header" id="property-header"></div>
+                <div class="modal-body" id="property-body"></div>
+            </div>
+        </div>
+
+        <!-- Add Property Modal -->
+        <div class="home-modal" id="add-property-modal">
+            <div class="add-property-modal-content container-fluid">
+                <div class="modal-header" id="add-property-header">
+                    <h3>Add Property</h3>
+                </div>
+                <div class="modal-body" id="add-property-body">
+                    <div class="form-group">
+                        <div>
+                            <input type="text" id="street-input">
+                            <label><b>Street</b></label>
+                        </div>
+                        <div>
+                            <input type="text" id="city-input">
+                            <label><b>City</b></label>
+                        </div>
+                        <div>
+                            <input type="text" id="state-input">
+                            <label><b>State</b></label>
+                        </div>
+                        <div>
+                            <input type="text" id="zip-input">
+                            <label><b>Zip Code</b></label>
+                        </div>
+                        <button id="add-property-btn" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Add Property
+                        </button>
+                        <button class="btn btn-danger cancel-add-property">
+                                <span class="glyphicon glyphicon-remove-circle"></span> Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Individual Message Modal -->
+        <div class="home-modal" id="indiv-msg-modal">
+            <div class="msg-modal-content container-fluid">
+                <div class="modal-header" id="msg-header"></div>
+                <div class="modal-body" id="msg-body">
+                <!--<button class="btn btn-danger close-btn">
+                    <span class="glyphicon glyphicon-remove-circle"></span> Close
+                </button>-->
+            </div>
+        </div>
+</body>
+
+<script>
+$(document).ready(function(){
+
+    //debug multiple class click
+    var property_counter = 0;
+
+    //hide the main content until it's done loading
+    $(".main-content").hide();
+    $(".loading").show();
+
+    //confirms authentication or redirects the user otherwise
+    var u = new User();
+    u.authenticate(null, function(user){
+
+        // do the user manipulation in this postback function
+        $("#user-image").append('<img class="img img-circle" src="' + user.image_url_main + '" alt="" />');
+        $("#user-name").text(user.first_name + " " + user.last_name);
+
+//----- PROPERTY SECTION -----
+
+        var p = new Property();
+        p.getPropertyBySession(function (data) {
+
+            //get the properties by session
+            data.forEach(function(property){
+                $("#property-content").append(
+                    '<div class="property-item" ' + 
+                        'property_id="' + property.id + '" ' +
+                        'property_image="' + property.image_url_main + '" ' +
+                        'street="' + property.street_address + '" ' +
+                        'city="' + property.city + '" ' +
+                        'state="' + property.state + '" ' +
+                        'zip="' + property.zip + '" >' +
+                        '<img class="img img-circle" src="' + property.image_url_thumbnail + '" alt="" />' +
+                    '</div>'
+                );
+            });
+
+            //property detail modal
+            $(".property-item").click(function () {
+                if(property_counter == 0){
+
+                    //setup the property modal
+                    setupPropertyDetailModal($(this));
+                    property_counter ++;
+                }
+            });
+
+            //add property modal
+            $("#add-property-span").click(function () {
+                $("#add-property-modal").show();
+            });
+
+            //function called when adding property
+            $("#add-property-btn").click(function () {
+                p.createProperty($("#street-input").val(), 
+                                    $("#city-input").val(), 
+                                    $("#state-input").val(), 
+                                    $("#zip-input").val(), 
+                    function (data) {
+                        console.log(data);
+                        $("#add-property-modal").hide();
+                        window.location.reload();
+                    }
+                );
+            });
+
+            //close add property modal
+            $(".cancel-add-property").click(function () {
+                $("#add-property-modal").hide();
+            });
+
+            //display the loaded content
+            $(".main-content").show();
+            $(".btn-logout").show();
+            setup();
+
+            //show the user inbox loader
+            $("#user-inbox").children().hide();
+            $("#inbox-loader").show();
+
+            $(".loading").hide();
+
+//----- INBOX SECTION -----
+
+            //get the user's messages
+            var i = new Inbox();
+            i.getReceived(function (data) {
+                console.log(data);
+                data.forEach(function (item) {
+
+                    //debug
+                    console.log(item);
+
+                    //set unopened glyph
+                    var glyph = '<span class="glyphicon glyphicon-unchecked"></span>';
+                    if(item.is_opened == true) {
+                        glyph = '<span class="glyphicon glyphicon-check"></span>';
+                    }
+
+                    //append the data to the html
+                    $("#inbox-table-body").append(
+                        '<tr class="msg-row" ' +
+                        'message-id="' + item.id + '" ' +
+                        'from-email="' + item.sender.email + '" ' +
+                        'message-header="' + item.message.header + '" ' +
+                        'message-body="' + item.message.body + '" ' +
+                        'message-time-sent="' + item.message.time_sent + '">' +
+                            '<td scope="row">' + item.id + '</td>' +
+                            '<td>' + item.message.header + '</td>' +
+                            '<td>' + item.sender.email + '</td>' +
+                            '<td>' + item.message.time_sent + '</td>' +
+                            '<td>' + glyph + '</td>' +
+                        '</tr>'
+                    );
+                });
+
+                //this is where inbox show should go
+                $("#user-inbox").children().show();
+                $("#inbox-loader").hide();
+
+                //open individual message modal
+                $(".msg-row").click(function () {
+                    setupIndividualMessageModal($(this));
+                });
+
+                //send a message to the modal
+                $("#send-msg-btn").click(function () {
+                    i.send($("#to-input").val(), $("#subject-input").val(), $("#body-input").val(), function (message) {
+                        console.log(message);
+                        clearMessageModal();
+                    });
+                    $(this).children().hide();
+                    $(this).append('<i class="fa fa-circle-o-notch fa-spin container-fluid"></i>');
+                });
+
+                //open the message modal
+                $("#msg-modal-btn").click(function () {
+                    $("#msg-modal").show();
+                });
+
+                //open the message modal
+                $(".cancel-btn").click(function () {
+                    $("#msg-modal").hide();
+                    clearMessageModal();
+                });
+            });
+        });
+
+    });
+
+    //add a user logout option
+    $("#btn-logout").click(function() {
+            u.logout(function (data) {
+                console.log(data);
+                window.location.href = "login.html";
+            });
+    });
+
+//----- WINDOW SETUP
+
+    $( window ).resize(function() {
+        setup();
+    });
+
+    function clearIndividualMessageModal() {
+        $("#indiv-msg-modal").hide();
+        $("#msg-header").children().remove();
+        $("#msg-body").children().remove();
+    }
+
+    function setupIndividualMessageModal(message) {
+
+        var om = new Inbox();
+        om.open(message.attr('message-id'), function(data) {
+            console.log(data);
+            message.children("span").attr("class", "glyphicon glyphicon-check");
+        });
+
+        //create message header
+        $("#msg-header").append(
+            '<span id="msg-detail-close" class="glyphicon glyphicon-remove close"></span>' +
+            '<h3 style="display: inline-block;">' + message.attr('message-header') + '</h3> <br />' +
+            '<h5 style="display: inline-block;">From: ' + message.attr('from-email') + '</h5>'
+        );
+
+        //create indiv message body
+        $("#msg-body").append(
+            '<div id="msg-body">' +
+                '<p>' + message.attr('message-body') + '</p>' +
+            '</div>'
+        );
+
+        //close individual message modal
+        $("#msg-detail-close").click(function () {
+            console.log("close modal");
+            clearIndividualMessageModal();
+        });
+
+        //show the modal
+        $("#indiv-msg-modal").show();
+    }
+
+    function clearMessageModal() {
+        $("#msg-modal").hide();
+        $("#to-input").val('');
+        $("#subject-input").val('');
+        $("#body-input").val('');
+        $("#send-msg-btn").children().hide();
+        $("#send-msg-btn span").show();
+    }
+
+    function setupPropertyDetailModal(property) {
+
+        var formattedAddress = property.attr('street') + ',' + 
+                                    property.attr('city') + ',' + 
+                                    property.attr('state') + ',' + 
+                                    property.attr('zip');
+
+        //create the property modal header
+        $("#property-header").append(
+            '<h3 style="display: inline-block;">' + property.attr('street') + '</h3>' +
+            '<span id="prop-close" class="glyphicon glyphicon-remove close"></span>'
+        );
+
+        //create the property modal body
+        $("#property-body").append(
+            '<iframe class="iframe-map"' +
+                'width="600" ' +
+                'height="450" ' +
+                'frameborder="0" style="border:0" ' +
+                'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB3d2h490lrWSPqG4SgwA5fQvqrRAPO6fc' +
+                '&q=' +  formattedAddress + '" allowfullscreen>' +
+            '</iframe>' +
+            '<div>' +
+                '<div class="property-detail-info">' + 
+                    '<div>' + property.attr('street') + '</div>' +
+                    '<div>' + property.attr('city') +  ', ' + property.attr('state') + '</div>' +
+                    '<div>' + property.attr('zip') + '</div>' + 
+                '</div>' +
+                '<img class="property-detail-image" src="' +  property.attr('property_image') + '" />' +
+            '</div>' /* + 
+            '<div>' +
+                '<button id="inv-btn" class="btn btn-default">Invite Tenants</button>' +
+                '<button id="remove-property-btn" class="btn btn-danger">Remove Property</button>' +
+            '</div>' */
+        );
+
+        console.log(formattedAddress);
+
+        $("#prop-close").click(function() {
+            clearPropertyDetailModal();
+        });
+
+        $("#property-detail-modal").show();
+    }
+
+    function clearPropertyDetailModal() {
+        $("#property-detail-modal").hide();
+        $("#property-body").children().remove();
+        $("#property-header").children().remove();
+        property_counter = 0;
+    }
+
+    function setup () {
+        //adjust the width of the user property box
+        var offset = $("#user-inbox").width() - ($("#user-properties").width() + $("#user-profile").width());
+        if(offset > 0){ 
+            $("#user-properties").width($("#user-properties").width() + offset - 65);
+        }
+
+        //fix the height of the boxes
+        $("#user-profile").height($("#user-properties").height());
+        $("#user-profile").offset().top = $("#user-properties").offset().top;
+    }
+
+});
+</script>
+
+</html>
